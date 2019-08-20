@@ -20,6 +20,7 @@ namespace MyAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles ="admin")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
