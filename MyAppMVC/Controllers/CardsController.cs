@@ -19,7 +19,7 @@ namespace MyAppMVC.Controllers
         // GET: api/Cards
         public IQueryable<Card> GetCards()
         {
-            return db.Cards;
+            return (db.Cards);
         }
 
         // GET: api/Cards/5
