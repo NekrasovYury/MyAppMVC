@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -17,6 +18,29 @@ namespace MyAppMVC.Models
             return userIdentity;
         }
     }
+    
+    public class Card
+    {
+        public int Id { get; set; }
+        public string CardName { get; set; }
+        public int NumberCard { get; set; }
+        public int Money { get; set; }
+
+        public ICollection<User> Users { get; set; }
+        public Card()
+        {
+            Users = new List<User>();
+        }
+    }
+    public class User
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public int MyProperty { get; set; }
+
+        public int? CardId { get; set; }
+        public Card Card { get; set; }
+    }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -24,6 +48,8 @@ namespace MyAppMVC.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<Card> Cards { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public static ApplicationDbContext Create()
         {
